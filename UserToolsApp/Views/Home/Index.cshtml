@@ -2,12 +2,9 @@
 
 <form asp-action="OptionSelected">
     <p>Select in which problem you wanna help:</p>
-    <input type="radio" id="ohm" name="option" asp-for="Ohm" value="1">
-    <label for="ohm">Resistance calculations</label><br>
-    <input type="radio" id="geometry" name="option" asp-for="Geometry" value="1">
-    <label for="geometry">Geometry calculations</label><br>  
-    <input type="radio" id="svt" name="option" asp-for="Svt" value="1">
-    <label for="svt">Svt calculations</label><br><br>
+    @Html.RadioButtonFor(m => m.Option,"geometry")Geometry<br/>
+    @Html.RadioButtonFor(m => m.Option,"ohm")Ohm<br/>
+    @Html.RadioButtonFor(m => m.Option,"svt")Svt<br/>
     
     <input class="btn" type="submit" value="Submit">
 </form>
