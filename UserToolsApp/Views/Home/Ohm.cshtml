@@ -1,8 +1,12 @@
 ﻿@model OhmViewModel
 
 <form asp-action="CalculateOhmData">
-    <input type="number" step="0.01" class="form-control" placeholder="Voltage" asp-for="Voltage"/><br/>
-    <input type="number" step="0.01" class="form-control" placeholder="Current" asp-for="Current"/>
-    <input type="number" stem="0.01" class="form-control" placeholder="Resistance" asp-for="Resistance"/>
-    <button type="submit" class="btn-check">Calculate</button>
+    <p>Check radio button behind the property title to indicate variable which you want to calculate</p><br/>
+    <label for="voltage">Voltage [V]:</label> @Html.RadioButtonFor(m => m.Result, "voltage")
+    <input type="number" id="voltage" step="0.01" class="form-control" placeholder="Voltage" asp-for="Voltage"/><br/>
+    <label for="current">Current [A]:</label> @Html.RadioButtonFor(m => m.Result, "current")
+    <input type="number" id="current" step="0.01" class="form-control" placeholder="Current" asp-for="Current"/><br/>
+    <label for="resistance">Resistance [Ω]:</label> @Html.RadioButtonFor(m => m.Result, "resistance")
+    <input type="number" id="resistance" stem="0.01" class="form-control" placeholder="Resistance" asp-for="Resistance"/><br/>
+    <button type="submit" class="btn-success">Calculate</button>
 </form>
