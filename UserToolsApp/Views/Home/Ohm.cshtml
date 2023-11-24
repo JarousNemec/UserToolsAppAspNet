@@ -1,0 +1,8 @@
+﻿@model OhmViewModel
+
+<form asp-action="CalculateOhmData">
+    <input type="number" step="0.01" class="form-control" placeholder="Voltage" asp-for="Voltage"/><br/>
+    <input type="number" step="0.01" class="form-control" placeholder="Current" asp-for="Current"/>
+    <input type="number" stem="0.01" class="form-control" placeholder="Resistance" asp-for="Resistance"/>
+    <button type="submit" class="btn-check">Calculate</button>
+</form>
