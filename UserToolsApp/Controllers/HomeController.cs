@@ -6,14 +6,16 @@ namespace UserToolsApp.Controllers;
 
 public class HomeController : Controller
 {
-    public static OhmViewModel _ohmViewModel = new ();
-    public static SvtViewModel _SvtViewModel = new ();
+    public static OhmViewModel OhmModel = new();
+    public static SvtViewModel SvtModel = new();
+    public static GeometryViewModel GeometryModel = new();
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
     }
+
     [HttpGet]
     public IActionResult Index()
     {
@@ -27,66 +29,74 @@ public class HomeController : Controller
         {
             case "geometry":
                 return RedirectToAction("Geometry");
-            case "ohm": 
+            case "ohm":
                 return RedirectToAction("Ohm");
-            case "svt": 
+            case "svt":
                 return RedirectToAction("Svt");
         }
+
         return RedirectToAction("Index");
     }
+
     [HttpGet]
     public IActionResult Ohm()
     {
-        return View(_ohmViewModel);
+        return View(OhmModel);
     }
-    
+
     [HttpGet]
     public IActionResult Svt()
     {
-        return View(_SvtViewModel);
+        return View(SvtModel);
     }
-    
+
     [HttpGet]
     public IActionResult Geometry()
     {
-        return View();
+        return View(GeometryModel);
     }
-    
+
     [HttpPost]
     public IActionResult CalculateOhmData(OhmViewModel model)
     {
-        _ohmViewModel = model;
-        switch (model.Result)
+        OhmModel = model;
+        switch (model.Option)
         {
             case "voltage":
-                _ohmViewModel.Voltage = model.Resistance * model.Current;
+                OhmModel.Voltage = model.Resistance * model.Current;
                 break;
-            case "current": 
-                _ohmViewModel.Current = model.Voltage / model.Resistance;
+            case "current":
+                if (model.Resistance > 0)
+                    OhmModel.Current = model.Voltage / model.Resistance;
                 break;
-            case "resistance": 
-                _ohmViewModel.Resistance = model.Voltage / model.Current;
+            case "resistance":
+                if (model.Current > 0)
+                    OhmModel.Resistance = model.Voltage / model.Current;
                 break;
         }
+
         return RedirectToAction("Ohm");
     }
-    
+
     [HttpPost]
     public IActionResult CalculateSvtData(SvtViewModel model)
     {
-        _SvtViewModel = model;
-        switch (model.Result)
+        SvtModel = model;
+        switch (model.Option)
         {
             case "time":
-                _SvtViewModel.Time = model.Distance / model.Velocity;
+                if (model.Velocity > 0)
+                    SvtModel.Time = model.Distance / model.Velocity;
                 break;
-            case "distance": 
-                _SvtViewModel.Distance = model.Velocity * model.Time;
+            case "distance":
+                SvtModel.Distance = model.Velocity * model.Time;
                 break;
-            case "velocity": 
-                _SvtViewModel.Velocity = model.Distance / model.Time;
+            case "velocity":
+                if (model.Time > 0)
+                    SvtModel.Velocity = model.Distance / model.Time;
                 break;
         }
+
         return RedirectToAction("Svt");
     }
 
@@ -99,5 +109,14 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public IActionResult CalculateGeometryData(GeometryViewModel model)
+    {
+        GeometryModel = model;
+        GeometryModel.Cubic = model.SideA * model.SideB * model.SideC;
+        GeometryModel.Area =
+            2 * ((model.SideA * model.SideB) + (model.SideA * model.SideC) + (model.SideA * model.SideC));
+        return RedirectToAction("Geometry");
     }
 }

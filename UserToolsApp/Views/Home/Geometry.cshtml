@@ -1,0 +1,12 @@
+@model GeometryViewModel
+
+<form asp-action="CalculateGeometryData">
+    <label for="sa">Side A [m]:</label>
+    <input type="number" id="sa" step="0.01" class="form-control" asp-for="SideA"/><br/>
+    <label for="sb">Side B [m]:</label>
+    <input type="number" id="sb" step="0.01" class="form-control" asp-for="SideB"/><br/>
+    <label for="sc">Side C [m]:</label>
+    <input type="number" id="sc" stem="0.01" class="form-control" asp-for="SideC"/><br/>
+    <button type="submit" class="btn-success">Calculate</button>
+    <h2>Area: @Model.Area, Cubic: @Model.Cubic</h2>
+</form>

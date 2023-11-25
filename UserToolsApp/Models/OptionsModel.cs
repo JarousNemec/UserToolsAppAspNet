@@ -2,5 +2,5 @@
 
 public class OptionsModel
 {
-    public string Option { get; set; }
+    public string Option { get; set; } = "geometry";
 }

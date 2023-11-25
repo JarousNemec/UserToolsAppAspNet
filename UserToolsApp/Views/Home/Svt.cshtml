@@ -2,11 +2,11 @@
 
 <form asp-action="CalculateSvtData">
     <p>Check radio button behind the property title to indicate variable which you want to calculate</p><br/>
-    <label for="voltage">Time [s]:</label> @Html.RadioButtonFor(m => m.Result, "time")
+    <label for="voltage">Time [s]:</label> @Html.RadioButtonFor(m => m.Option, "time")
     <input type="number" id="voltage" step="0.01" class="form-control" placeholder="Voltage" asp-for="Time"/><br/>
-    <label for="current">Distance [m]:</label> @Html.RadioButtonFor(m => m.Result, "distance")
+    <label for="current">Distance [m]:</label> @Html.RadioButtonFor(m => m.Option, "distance")
     <input type="number" id="current" step="0.01" class="form-control" placeholder="Current" asp-for="Distance"/><br/>
-    <label for="resistance">Velocity [m/s]:</label> @Html.RadioButtonFor(m => m.Result, "velocity")
+    <label for="resistance">Velocity [m/s]:</label> @Html.RadioButtonFor(m => m.Option, "velocity")
     <input type="number" id="resistance" stem="0.01" class="form-control" placeholder="Resistance" asp-for="Velocity"/><br/>
     <button type="submit" class="btn-success">Calculate</button>
 </form>

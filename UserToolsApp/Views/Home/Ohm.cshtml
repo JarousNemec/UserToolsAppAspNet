@@ -2,11 +2,11 @@
 
 <form asp-action="CalculateOhmData">
     <p>Check radio button behind the property title to indicate variable which you want to calculate</p><br/>
-    <label for="voltage">Voltage [V]:</label> @Html.RadioButtonFor(m => m.Result, "voltage")
+    <label for="voltage">Voltage [V]:</label> @Html.RadioButtonFor(m => m.Option, "voltage")
     <input type="number" id="voltage" step="0.01" class="form-control" placeholder="Voltage" asp-for="Voltage"/><br/>
-    <label for="current">Current [A]:</label> @Html.RadioButtonFor(m => m.Result, "current")
+    <label for="current">Current [A]:</label> @Html.RadioButtonFor(m => m.Option, "current")
     <input type="number" id="current" step="0.01" class="form-control" placeholder="Current" asp-for="Current"/><br/>
-    <label for="resistance">Resistance [Ω]:</label> @Html.RadioButtonFor(m => m.Result, "resistance")
+    <label for="resistance">Resistance [Ω]:</label> @Html.RadioButtonFor(m => m.Option, "resistance")
     <input type="number" id="resistance" stem="0.01" class="form-control" placeholder="Resistance" asp-for="Resistance"/><br/>
     <button type="submit" class="btn-success">Calculate</button>
 </form>
